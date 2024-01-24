@@ -35,7 +35,20 @@ function Home() {
        </button>
      </S.FilterArea>
 
+     <S.Title>
+      <h3>TAREFAS</h3>
+     </S.Title>
+
      <S.Content>
+      <TaskCard/>
+      <TaskCard/>
+      <TaskCard/>
+      <TaskCard/>
+      <TaskCard/>
+      <TaskCard/>
+      <TaskCard/>
+      <TaskCard/>
+      <TaskCard/>
       <TaskCard/>
      </S.Content>
      
