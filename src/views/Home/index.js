@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import * as S from './styles';
 
+import api from '../../services/api';
+
 //NOSSOS COMPONENTES
 import Header from '../../components/Header';
 import Footer from  '../../components/Footer';
@@ -9,6 +11,15 @@ import TaskCard from '../../components/TaskCard';
 
 function Home() {
   const [filterActived, setFilterActived] = useState();
+  const [tasks, setTasks] = useState([]);
+
+  async function loadTasks(){
+    await api.get(`/task/filter/${filterActived}/11:11:11:11:11:11`)
+    .then(response => {
+      setTasks(response.data);
+    })
+  }
+
   return (
     <S.Container>
      <Header/>
