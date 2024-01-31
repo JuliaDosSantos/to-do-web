@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import * as S from './styles';
 
 import api from '../../services/api';
@@ -14,11 +14,20 @@ function Home() {
   const [tasks, setTasks] = useState([]);
 
   async function loadTasks(){
-    await api.get(`/task/filter/${filterActived}/11:11:11:11:11:11`)
-    .then(response => {
+    try {
+      const response = await api.get(`/task/filter/${filterActived}/11:11:111:111:111:11`);
       setTasks(response.data);
-    })
+    } catch (error) {
+      console.error('Erro ao carregar tarefas:', error.message);
+      console.error('Status do erro:', error.response?.status);
+      console.error('Dados do erro:', error.response?.data);
+    }
+    
   }
+
+  useEffect(() => {
+    loadTasks();
+  }, [filterActived])
 
   return (
     <S.Container>
@@ -51,16 +60,9 @@ function Home() {
      </S.Title>
 
      <S.Content>
-      <TaskCard/>
-      <TaskCard/>
-      <TaskCard/>
-      <TaskCard/>
-      <TaskCard/>
-      <TaskCard/>
-      <TaskCard/>
-      <TaskCard/>
-      <TaskCard/>
-      <TaskCard/>
+  
+        <TaskCard/>
+     
      </S.Content>
      
      <Footer/>
