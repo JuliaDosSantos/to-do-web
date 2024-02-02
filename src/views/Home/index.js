@@ -10,18 +10,16 @@ import FilterCard from '../../components/FilterCard';
 import TaskCard from '../../components/TaskCard';
 
 function Home() {
-  const [filterActived, setFilterActived] = useState();
+  const [filterActived, setFilterActived] = useState('all');
   const [tasks, setTasks] = useState([]);
 
   async function loadTasks(){
-    try {
-      const response = await api.get(`/task/filter/${filterActived}/11:11:111:111:111:11`);
-      setTasks(response.data);
-    } catch (error) {
-      console.error('Erro ao carregar tarefas:', error.message);
-      console.error('Status do erro:', error.response?.status);
-      console.error('Dados do erro:', error.response?.data);
-    }
+    await api.get(`/task/filter/${filterActived}/11:11:111:111:111:11`)
+        .then(response=> {
+          console.log('teste');
+          console.log(response);
+            setTasks(response.data);
+        })
     
   }
 
@@ -60,9 +58,11 @@ function Home() {
      </S.Title>
 
      <S.Content>
-  
+      {  
+        tasks.map(t => (
         <TaskCard/>
-     
+        ))
+      }  
      </S.Content>
      
      <Footer/>
