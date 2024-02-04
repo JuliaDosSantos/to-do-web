@@ -3,7 +3,7 @@ import * as S from './styles';
 
 import iconDefault from '../../assets/default.png';
 
-function TaskCard() {
+function TaskCard({type, title, date, hour}) {
   return (
     <S.Container>
       <S.TopCard>
