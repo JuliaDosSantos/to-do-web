@@ -32,11 +32,19 @@ export const RighSide = styled.div`
     align-items: center;
     justify-content: flex-end;
 
-    a {
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    a, button {
         color: #FFF;
         font-weight: bold;
         text-decoration: none;
         margin: 0 10px;
+
+    
 
         &:hover{
             color: #EE6B26;
