@@ -6,6 +6,7 @@ import api from '../../services/api';
 //NOSSOS COMPONENTES
 import Header from '../../components/Header';
 import Footer from  '../../components/Footer';
+import TypeIcons from '../../utils/typeIcons';
 
 function Task() {
     const [lateCount, setLateCount] = useState();
@@ -24,7 +25,21 @@ function Task() {
 
   return (
     <S.Container>
-        <Header lateCount = {lateCount} clickNotification = {Notification}/>
+        <Header lateCount = {lateCount} />
+
+      <S.Form>
+        <S.TypeIcons>
+          {
+            TypeIcons.map(icon => (
+              <img src={icon} alt = "Tipo da tarefa"/>
+
+            ))
+          }
+
+        </S.TypeIcons>
+
+      </S.Form>
+
         <Footer/>
     </S.Container>
   )
