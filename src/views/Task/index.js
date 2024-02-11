@@ -30,8 +30,8 @@ function Task() {
       <S.Form>
         <S.TypeIcons>
           {
-            TypeIcons.map(icon => (
-              <img src={icon} alt = "Tipo da tarefa"/>
+            TypeIcons.map((icon, index) => (
+              index > 0 && <img src={icon} alt = "Tipo da tarefa"/>
 
             ))
           }

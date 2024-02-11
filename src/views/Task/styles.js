@@ -12,4 +12,18 @@ export const Container = styled.div`
     `
 
     export const TypeIcons = styled.div`
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        img {
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+            cursor: pointer;
+
+            &:hover{
+                opacity: 0.5;
+            }
+        }
     `
