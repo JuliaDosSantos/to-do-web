@@ -9,6 +9,7 @@ export const Container = styled.div`
 
     export const Form = styled.div`
         width: 50%;
+        margin-bottom: 70px;
     `
 
     export const TypeIcons = styled.div`
@@ -77,5 +78,53 @@ export const Container = styled.div`
         textarea{
             font-size: 16px;
             border: 1px solid #EE6B26;
+        }
+    `
+
+    export const Options = styled.div`
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            font-weight: bold;
+            color: #20295F;
+            border: none;
+            background: none;
+            font-size: 18px;
+            cursor: pointer;
+            
+            &: hover{
+                opacity: 0.7;
+            }
+        }
+
+        div {
+            display: flex;
+            align-items: center;
+            color: #EE6B26;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    `
+
+    export const Save = styled.div`
+        width: 100%;
+        margin-top: 20px;
+
+        button {
+            width: 100%;
+            background: #EE6B26;
+            border: none;
+            font-size: 20px;
+            color: #FFF;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            
+            &: hover{
+                opacity: 0.7;
+            }
+
         }
     `

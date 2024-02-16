@@ -66,7 +66,19 @@ function Task() {
           <input type="time" placeholder = "Título da tarefa..."></input>
           <img src = {iconClock} alt = "Relógio"/>
         </S.Input>
-      
+        
+        <S.Options>
+          <div>
+            <input type = "checkbox"/>
+            <span>CONCLUÍDO</span>
+          </div>
+          <button type = "button">EXCLUIR</button>
+        </S.Options>
+
+        <S.Save>
+          <button type = "button">SALVAR</button>
+        </S.Save>
+
       </S.Form>
 
         <Footer/>
