@@ -14,6 +14,13 @@ import iconClock from '../../assets/clock.png';
 function Task() {
     const [lateCount, setLateCount] = useState();
     const [type, setType] = useState();
+    const [id, setId] = useState();
+    const [done, setDone] = useState(false);
+    const [tittle, setTittle] = useState();
+    const [description, setDescripition] = useState();
+    const [date, setDate] = useState();
+    const [hour, setHour] = useState();
+    const [macaddress, setMacaddress] = useState();
  
     async function lateVerify(){
       await api.get(`/task/filter/late/11:11:111:111:111:11`)
@@ -47,29 +54,29 @@ function Task() {
 
         <S.Input>
           <span>Título</span>
-          <input type="text" placeholder = "Título da tarefa..."></input>
+          <input type="text" placeholder = "Título da tarefa..." onChange={e => setTittle(e.target.value)} value={tittle}/>
         </S.Input>
 
         <S.TextArea>
-          <span>Título</span>
-          <textarea rows = {5} placeholder = "Detalhes da tarefa..." />
+          <span>Descrição</span>
+          <textarea rows = {5} placeholder = "Detalhes da tarefa..." onChange={e => setDescripition(e.target.value)} value={description} />
         </S.TextArea>
 
         <S.Input>
           <span>Data</span>
-          <input type="date" placeholder = "Título da tarefa..."></input>
+          <input type="date" placeholder = "Título da tarefa..." onChange={e => setDate(e.target.value)} value={date}/>
           <img src = {iconCalendar} alt = "Calendário"/>
         </S.Input>
 
         <S.Input>
           <span>Hora</span>
-          <input type="time" placeholder = "Título da tarefa..."></input>
+          <input type="time" placeholder = "Título da tarefa..." onChange={e => setHour(e.target.value)} value={hour}/>
           <img src = {iconClock} alt = "Relógio"/>
         </S.Input>
         
         <S.Options>
           <div>
-            <input type = "checkbox"/>
+            <input type = "checkbox" checked={done} onChange = {() => setDone(!done)}/>
             <span>CONCLUÍDO</span>
           </div>
           <button type = "button">EXCLUIR</button>
