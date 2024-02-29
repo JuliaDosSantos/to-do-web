@@ -16,11 +16,11 @@ function Task() {
     const [type, setType] = useState();
     const [id, setId] = useState();
     const [done, setDone] = useState(false);
-    const [tittle, setTittle] = useState();
+    const [title, setTitle] = useState();
     const [description, setDescripition] = useState();
     const [date, setDate] = useState();
     const [hour, setHour] = useState();
-    const [macaddress, setMacaddress] = useState();
+    const [macaddress, setMacaddress] = useState('11:11:111:111:111:11');
  
     async function lateVerify(){
       await api.get(`/task/filter/late/11:11:111:111:111:11`)
@@ -29,6 +29,19 @@ function Task() {
         console.log(response);
       })
     }
+
+    async function Save(){
+      await api.post('/task', {
+        macaddress,
+        type,
+        title,
+        description,
+        when: `${date}T${hour}:00.000`
+      }).then(() =>
+        alert('TAREFA CADASTRADA COM SUCESSO')
+      )
+    }
+  
 
   useEffect(() => {
     lateVerify();
@@ -54,7 +67,7 @@ function Task() {
 
         <S.Input>
           <span>Título</span>
-          <input type="text" placeholder = "Título da tarefa..." onChange={e => setTittle(e.target.value)} value={tittle}/>
+          <input type="text" placeholder = "Título da tarefa..." onChange={e => setTitle(e.target.value)} value={title}/>
         </S.Input>
 
         <S.TextArea>
@@ -83,7 +96,7 @@ function Task() {
         </S.Options>
 
         <S.Save>
-          <button type = "button">SALVAR</button>
+          <button type = "button" onClick={Save}>SALVAR</button>
         </S.Save>
 
       </S.Form>
