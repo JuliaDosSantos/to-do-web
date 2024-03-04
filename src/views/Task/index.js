@@ -11,7 +11,7 @@ import TypeIcons from '../../utils/typeIcons';
 import iconCalendar from '../../assets/calendar.png';
 import iconClock from '../../assets/clock.png';
 
-function Task() {
+function Task({match}) {
     const [lateCount, setLateCount] = useState();
     const [type, setType] = useState();
     const [id, setId] = useState();
@@ -30,6 +30,18 @@ function Task() {
       })
     }
 
+    async function LoadTaskDetails(){
+      console.log(match)
+      await api.get(`/task/${match.params.id}`)
+      .then(response => {
+        setType(response.data.type)
+        setTitle(response.data.title)
+        setDescripition(response.data.description)
+        setDate(new Date(response.data.when))
+        setHour(new Date(response.data.when))
+      })
+    }
+
     async function Save(){
       await api.post('/task', {
         macaddress,
@@ -45,6 +57,7 @@ function Task() {
 
   useEffect(() => {
     lateVerify();
+    LoadTaskDetails();
   }, [])
 
   return (
