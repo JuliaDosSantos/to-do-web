@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import * as S from './styles';
+import {format} from 'date-fns';
 
 import api from '../../services/api';
+import { useParams, Navigate } from "react-router-dom";
 
 //NOSSOS COMPONENTES
 import Header from '../../components/Header';
@@ -11,7 +13,8 @@ import TypeIcons from '../../utils/typeIcons';
 import iconCalendar from '../../assets/calendar.png';
 import iconClock from '../../assets/clock.png';
 
-function Task({match}) {
+function Task() {
+    let params = useParams();
     const [lateCount, setLateCount] = useState();
     const [type, setType] = useState();
     const [id, setId] = useState();
@@ -26,19 +29,17 @@ function Task({match}) {
       await api.get(`/task/filter/late/11:11:111:111:111:11`)
       .then(response =>{
         setLateCount(response.data.length)
-        console.log(response);
       })
     }
 
     async function LoadTaskDetails(){
-      console.log(match)
-      await api.get(`/task/${match.params.id}`)
+      await api.get(`/task/${params.id}`)
       .then(response => {
         setType(response.data.type)
         setTitle(response.data.title)
         setDescripition(response.data.description)
-        setDate(new Date(response.data.when))
-        setHour(new Date(response.data.when))
+        setDate(format (new Date(response.data.when), 'yyyy-MM-dd'))
+        setHour(format (new Date(response.data.when), 'HH:mm'))
       })
     }
 
