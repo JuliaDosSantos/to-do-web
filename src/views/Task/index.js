@@ -58,7 +58,10 @@ function Task() {
 
   useEffect(() => {
     lateVerify();
-    LoadTaskDetails();
+    console.log("texto");
+    if (params.id) {
+      LoadTaskDetails();
+    }
   }, [])
 
   return (
