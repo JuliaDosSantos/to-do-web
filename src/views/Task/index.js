@@ -15,6 +15,7 @@ import iconClock from '../../assets/clock.png';
 
 function Task() {
     let params = useParams();
+    const [navigate, setNavigate] = useState(false);
     const [lateCount, setLateCount] = useState();
     const [type, setType] = useState();
     const [id, setId] = useState();
@@ -44,15 +45,29 @@ function Task() {
     }
 
     async function Save(){
-      await api.post('/task', {
+      if (params.id) {
+        await api.put(`/task/${params.id}`, {
+          macaddress,
+          done,
+          type,
+          title,
+          description,
+          when: `${date}T${hour}:00.000`
+        }).then(() => {
+          setNavigate(true)
+      })
+
+      } else{
+        await api.post('/task', {
         macaddress,
         type,
         title,
         description,
         when: `${date}T${hour}:00.000`
-      }).then(() =>
-        alert('TAREFA CADASTRADA COM SUCESSO')
-      )
+      }).then(() => {
+        setNavigate(true)
+      })
+      }
     }
   
 
@@ -66,7 +81,8 @@ function Task() {
 
   return (
     <S.Container>
-        <Header lateCount = {lateCount} />
+      {navigate && <Navigate to="/" />}
+      <Header lateCount = {lateCount} />
 
       <S.Form>
         <S.TypeIcons>
