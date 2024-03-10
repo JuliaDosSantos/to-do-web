@@ -37,6 +37,7 @@ function Task() {
       await api.get(`/task/${params.id}`)
       .then(response => {
         setType(response.data.type)
+        setDone(response.data.done)
         setTitle(response.data.title)
         setDescripition(response.data.description)
         setDate(format (new Date(response.data.when), 'yyyy-MM-dd'))
@@ -45,6 +46,19 @@ function Task() {
     }
 
     async function Save(){
+
+      //Validaçaõ dos dados
+      if(!title)
+        return alert ("Você precisa informar o título da tarefa")
+      else if (!description)
+        return alert ("Você precisa informar a descrição da tarefa")
+      else if (!type)
+        return alert ("Você precisa selecionar o tipo da tarefa")
+      else if (!date)
+        return alert ("Você precisa definir a data da tarefa")
+      else if (!hour)
+        return alert ("Você precisa definir a hora da tarefa")
+
       if (params.id) {
         await api.put(`/task/${params.id}`, {
           macaddress,
