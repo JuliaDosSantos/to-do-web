@@ -78,12 +78,17 @@ function Task() {
         title,
         description,
         when: `${date}T${hour}:00.000`
-      }).then(() => {
-        setNavigate(true)
-      })
+      }).then(() => {setNavigate(true)})
       }
     }
   
+    async function Remove(){
+      const res = window.confirm ('Deseja realmente remover essa tarefa?')
+      if (res==true){
+        await api.delete(`/task/${params.id}`)
+        .then(() => setNavigate(true))
+      } 
+    }
 
   useEffect(() => {
     lateVerify();
@@ -139,7 +144,7 @@ function Task() {
             <input type = "checkbox" checked={done} onChange = {() => setDone(!done)}/>
             <span>CONCLUÍDO</span>
           </div>
-          <button type = "button">EXCLUIR</button>
+          {params.id && <button type = "button" onClick={Remove}>EXCLUIR</button>}
         </S.Options>
 
         <S.Save>
