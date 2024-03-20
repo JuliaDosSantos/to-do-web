@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import * as S from './styles';
 import Qr from 'qrcode.react';
 
@@ -8,6 +8,12 @@ import Footer from  '../../components/Footer';
 
 
 function QrCode() {
+    const [mac, setMac] = useState();
+
+    async function SaveMac(){
+        await localStorage.setItem('@todo/macaddress', mac)
+    }
+    
     return (
         <S.Container>
             <Header/>
@@ -21,8 +27,8 @@ function QrCode() {
 
                 <S.ValidationCode>
                     <span>Digite a numeração que apareceu no seu celular</span>
-                    <input type="text"/>
-                    <button type="button">SINCRONIZAR</button>
+                    <input type="text" onChange={e => setMac(e.target.value)} value={mac}/>
+                    <button type="button" onClick={SaveMac}>SINCRONIZAR</button>
                 </S.ValidationCode>
             </S.Content>
 
