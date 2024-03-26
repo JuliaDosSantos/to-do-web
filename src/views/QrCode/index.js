@@ -11,7 +11,7 @@ function QrCode() {
     const [mac, setMac] = useState();
 
     async function SaveMac(){
-        await localStorage.setItem('@todo/macaddress', mac)
+        localStorage.setItem('@todo/macaddress', mac)
     }
     
     return (

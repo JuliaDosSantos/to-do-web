@@ -83,7 +83,6 @@ function Task() {
     }
 
   useEffect(() => {
-    console.log("texto");
     if (params.id) {
       LoadTaskDetails();
     }

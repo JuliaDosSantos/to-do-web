@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Link, Navigate} from 'react-router-dom';
+import {Link, Navigate, useNavigate  } from 'react-router-dom';
 import * as S from './styles';
 
 import api from '../../services/api';
@@ -15,13 +15,11 @@ function Home() {
   const [filterActived, setFilterActived] = useState('all');
   const [tasks, setTasks] = useState([]);
   const [navigate, setNavigate] = useState(false);
- 
+  const navigates = useNavigate();
 
   async function loadTasks(){
     await api.get(`/task/filter/${filterActived}/11:11:111:111:111:11`)
         .then(response=> {
-          console.log('teste');
-          console.log(response);
             setTasks(response.data);
         })
     
@@ -33,13 +31,17 @@ function Home() {
 
   useEffect(() => {
     loadTasks();
-    if(isConnected)
-    setNavigate(true);
+    console.log(isConnected)
+    if(!isConnected){
+      navigates('/qrcode');
+    }  
+
+
   }, [filterActived])
 
   return (
     <S.Container>
-      {<Navigate to="/qrcode"/>}
+      {/* {<Navigate to="/qrcode"/>} */}
      <Header clickNotification = {Notification}/>
      
      <S.FilterArea>
